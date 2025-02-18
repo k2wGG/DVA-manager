@@ -1,0 +1,18 @@
+{
+  "sessions": [
+    {
+      "address": "0xВашАдрес1",
+      "bearer": "ВашEyТокен1",
+      "llm_token": "ВашLLMToken1",
+      "task_token": "ВашTaskToken1",
+      "invite_code": "ВашInviteCode1"
+    },
+    {
+      "address": "0xВашАдрес2",
+      "bearer": "ВашEyТокен2",
+      "llm_token": "ВашLLMToken2",
+      "task_token": "ВашTaskToken2",
+      "invite_code": "ВашInviteCode2"
+    }
+  ]
+}
