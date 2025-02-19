@@ -95,21 +95,26 @@ function chooseOS() {
 // -----------------------
 // Функция установки зависимостей для Linux
 // -----------------------
-function installLinuxDependencies() {
+async function installLinuxDependencies() {
   return new Promise((resolve, reject) => {
-    const cmd = `sudo apt-get install -y xvfb libgbm-dev libxkbcommon-x11-0 libgtk-3-0 libasound2 libx11-xcb1 libxcb1 libxss1 libnss3 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libatk1.0-0 libatk-bridge2.0-0 libpango-1.0-0 libpangocairo-1.0-0 libcups2 libdrm2 libxrandr2 libgconf-2-4 libc6 ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 libgbm1 libnspr4 libnss3 libxcb1 xdg-utils`;
-    logInfo('Устанавливаются зависимости для Linux...');
-    exec(cmd, (error, stdout, stderr) => {
+    const cmd = `DEBIAN_FRONTEND=noninteractive sudo apt-get install -y xvfb libgbm-dev libxkbcommon-x11-0 libgtk-3-0 libx11-xcb1 libxcb1 libxss1 libnss3 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libatk1.0-0 libatk-bridge2.0-0 libpango-1.0-0 libpangocairo-1.0-0 libcups2 libdrm2 libxrandr2 libc6 ca-certificates fonts-liberation libappindicator3-1 libgbm1 libnspr4 libnss3 libxcb1 xdg-utils && npx playwright install-deps && npx playwright install`;
+    
+    logInfo('Устанавливаются зависимости для Linux...Пожалуйста, подождите');
+    exec(cmd, { maxBuffer: 1024 * 1024 }, (error, stdout, stderr) => {
+      if (stdout) console.log(stdout);
+      if (stderr) console.error(stderr);
       if (error) {
         logError(`Ошибка при установке зависимостей: ${error.message}`);
         reject(error);
       } else {
-        logSuccess('Зависимости для Linux успешно установлены.');
+        logSuccess('Зависимости для Linux успешно установлены, и браузерные бинарные файлы загружены.');
         resolve();
       }
     });
   });
 }
+
+
 
 // -----------------------
 // Функция выбора конфигураций (кошельков) — одна или все
